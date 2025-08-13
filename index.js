@@ -46,7 +46,7 @@ client.on('messageCreate', message => {
     if (message.author.bot) return;
 
     if (message.content === '!test') {
-        message.send('## na na na diva is a diva ');
+        message.reply('## na na na diva is a diva ');
 
     }
 });
@@ -55,7 +55,7 @@ client.on('messageCreate', message => {
     if (message.author.bot) return;
 
     if (message.content === '!test') {
-        message.send('## Thank you for using this bot.');
+        message.reply('## Thank you for using this bot.');
 
     }
 });
