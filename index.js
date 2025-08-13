@@ -46,10 +46,18 @@ client.on('messageCreate', message => {
     if (message.author.bot) return;
 
     if (message.content === '!test') {
-        message.reply('## na na na diva is a diva ');
+        message.send('## na na na diva is a diva ');
 
     }
 });
+client.on('messageCreate', message => {
+    // Ignore messages from bots
+    if (message.author.bot) return;
 
+    if (message.content === '!test') {
+        message.send('## Thank you for using this bot.');
+
+    }
+});
 
 client.login(process.env.DISCORD_TOKEN);
