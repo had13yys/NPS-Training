@@ -38,5 +38,23 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
+const { SlashCommandBuilder } = require('discord.js');
+
+const command = new SlashCommandBuilder()
+    .setName('say')
+    .setDescription('Make the bot repeat a message')
+    .addStringOption(option =>
+        option.setName('message')
+              .setDescription('The message to repeat')
+              .setRequired(true)
+    )
+    .addUserOption(option =>
+        option.setName('user')
+              .setDescription('This has no use')
+              .setRequired(true)
+    );
+
+
+
 // Log in
 client.login(TOKEN);
