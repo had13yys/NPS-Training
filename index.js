@@ -1,63 +1,42 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
 
-const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
-    ]
-});
+const TOKEN = process.env.DISCORD_TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
 
-client.once('ready', () => {
-    console.log(`✅ Logged in as ${client.user.tag}`);
-});
+// Create client
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.on('messageCreate', message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
+// Register global slash command
+const commands = [
+    new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Replies with Pong!'),
+].map(cmd => cmd.toJSON());
 
-    if (message.content === '!ping') {
-        message.reply('🏓 Pong!');
+const rest = new REST({ version: '10' }).setToken(TOKEN);
+
+(async () => {
+    try {
+        console.log('⏳ Registering global commands...');
+        await rest.put(
+            Routes.applicationCommands(CLIENT_ID),
+            { body: commands },
+        );
+        console.log('✅ Global commands registered.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
+
+// Handle slash commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.commandName === 'accept') {
+        await interaction.reply('Pong! 🏓');
     }
 });
 
-client.on('messageCreate', message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
-
-    if (message.content === '!chloe') {
-        message.reply('is a minge licker and a large slag (also an alcoholic)');
-    }
-});
-
-client.on('messageCreate', message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
-
-    if (message.content === '!diva') {
-        message.reply('## na na na diva is a diva ');
-
-    }
-});
-
-client.on('messageCreate', message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
-
-    if (message.content === '!test') {
-        message.reply('## na na na diva is a diva ');
-
-    }
-});
-client.on('messageCreate', message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
-
-    if (message.content === '!test') {
-        message.reply('Heyyy ${message.author.username thank you for testing me bro. 💪👊}!');
-
-    }
-});
-
-client.login(process.env.DISCORD_TOKEN);
+// Log in
+client.login(TOKEN);
