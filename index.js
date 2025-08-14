@@ -38,7 +38,6 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-const { SlashCommandBuilder } = require('discord.js');
 
 const command = new SlashCommandBuilder()
     .setName('say')
