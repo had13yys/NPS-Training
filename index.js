@@ -55,7 +55,7 @@ client.on('messageCreate', message => {
     if (message.author.bot) return;
 
     if (message.content === '!test') {
-        message.reply('## Thank you for using this bot.');
+        message.reply('Heyyy ${message.author.username thank you for testing me bro. 💪👊}!');
 
     }
 });
