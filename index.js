@@ -44,30 +44,6 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
-    if (interaction.commandName === 'pastoral-team') {
-        const pastoralMessage = {
-            content: "The pastoral team here at NPS is alternated to fit the departments' needs. We have multiple staff in place to support the pastoral department in it's position and it's upkeep & management. The pastoral team includes 4 senior safeguarding members each with their own individual subroles within the department. These vary depending on the staff member. You can see the current ladder below.\n\nAs of 14/08/2025, there is no Student Support Managers,  but when there is, this **will** be updated **as soon as possible**.",
-            embeds: [
-                {
-                    title: "Mr Luke McLean - Designated Safeguarding Lead",
-                    description: "Luke McLean is in charge of the department itself and works hard for it's management. He supports the staff inside the department and oversee it's daily operations.",
-                    color: 1662469
-                },
-                {
-                    title: "Miss Rose O'Connell - Deputy Designated Safeguarding Lead",
-                    description: "Rose O'Connell works alongside Luke McLean to ensure stability to the department and is in charge of provisions within the department. Rose ensures that provision strikes are handed out when necessary to avoid abuse of provisions.",
-                    color: 1662469
-                }
-            ],
-            components: []
-        };
-
-        await interaction.reply(pastoralMessage);
-    }
-});
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isChatInputCommand()) return;
-
     if (interaction.commandName === 'frp') {
         const frpMessage = {
             content: `Fail Roleplay is when a student does something that is deemed a) innopropriate b) unsuitable for roleplay purposes c) unrealistic and d) not appropriate for staff to deal with due to our age group
